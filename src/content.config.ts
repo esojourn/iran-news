@@ -1,5 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
+import Analytics from '@vercel/analytics/astro'
 
 const blog = defineCollection({
 	// Load Markdown and MDX files in the `src/content/blog/` directory.
