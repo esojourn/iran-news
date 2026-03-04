@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
@@ -9,10 +8,10 @@ import Analytics from '@vercel/analytics/astro'
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="zh-CN">
 	<head>
 		<BaseHead title={title} description={description} />
 		<style>
@@ -21,37 +20,129 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				max-width: 100%;
 				margin: 0;
 			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
 			.prose {
-				width: 720px;
+				width: 760px;
 				max-width: calc(100% - 2em);
 				margin: auto;
-				padding: 1em;
+				padding: 2em 1.5em 3em;
 				color: rgb(var(--gray-dark));
+				font-size: 1.05rem;
+				line-height: 1.9;
+				letter-spacing: 0.02em;
 			}
 			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
+				margin-bottom: 2em;
+				padding: 1.5em 0;
 				text-align: center;
-				line-height: 1;
 			}
 			.title h1 {
-				margin: 0 0 0.5em 0;
+				margin: 0 0 0.3em 0;
+				font-size: 1.8rem;
+				font-weight: 700;
+				line-height: 1.4;
+				letter-spacing: 0.03em;
 			}
 			.date {
-				margin-bottom: 0.5em;
+				margin-bottom: 0.8em;
 				color: rgb(var(--gray));
+				font-size: 0.9rem;
 			}
 			.last-updated-on {
 				font-style: italic;
+			}
+			/* 中文排版优化 */
+			.prose h1 {
+				font-size: 1.6rem;
+				margin: 2.5em 0 1em;
+				font-weight: 700;
+				letter-spacing: 0.02em;
+			}
+			.prose h2 {
+				font-size: 1.4rem;
+				margin: 2.2em 0 0.8em;
+				font-weight: 600;
+				padding-bottom: 0.4em;
+				border-bottom: 1px solid rgb(var(--gray-light));
+			}
+			.prose h3 {
+				font-size: 1.15rem;
+				margin: 1.8em 0 0.6em;
+				font-weight: 600;
+				color: rgb(var(--gray-dark));
+			}
+			.prose p {
+				margin-bottom: 1.4em;
+				text-align: justify;
+			}
+			.prose ul, .prose ol {
+				margin: 1em 0 1.6em;
+				padding-left: 1.8em;
+			}
+			.prose li {
+				margin-bottom: 0.6em;
+				line-height: 1.8;
+			}
+			.prose blockquote {
+				margin: 1.5em 0;
+				padding: 0.8em 1.2em;
+				background: rgba(var(--gray-light), 0.3);
+				border-left: 4px solid var(--accent);
+				border-radius: 0 6px 6px 0;
+				font-size: 0.95rem;
+			}
+			.prose blockquote p {
+				margin-bottom: 0;
+			}
+			.prose hr {
+				margin: 2.5em 0;
+				border: none;
+				border-top: 1px solid rgb(var(--gray-light));
+			}
+			.prose table {
+				margin: 1.5em 0;
+				border-collapse: collapse;
+				font-size: 0.95rem;
+			}
+			.prose th, .prose td {
+				padding: 0.7em 1em;
+				border: 1px solid rgb(var(--gray-light));
+				text-align: left;
+			}
+			.prose th {
+				background: rgba(var(--gray-light), 0.5);
+				font-weight: 600;
+			}
+			.prose strong {
+				font-weight: 600;
+				color: rgb(var(--black));
+			}
+			.prose a {
+				color: var(--accent);
+				text-decoration: none;
+				border-bottom: 1px solid transparent;
+				transition: border-color 0.2s;
+			}
+			.prose a:hover {
+				border-bottom-color: var(--accent);
+			}
+			@media (max-width: 720px) {
+				.prose {
+					padding: 1.5em 1em 2em;
+					font-size: 1rem;
+					line-height: 1.85;
+				}
+				.title h1 {
+					font-size: 1.5rem;
+				}
+				.prose h1 {
+					font-size: 1.4rem;
+				}
+				.prose h2 {
+					font-size: 1.25rem;
+				}
+				.prose h3 {
+					font-size: 1.1rem;
+				}
 			}
 		</style>
 	</head>
@@ -60,9 +151,6 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 		<Header />
 		<main>
 			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
 				<div class="prose">
 					<div class="title">
 						<div class="date">
